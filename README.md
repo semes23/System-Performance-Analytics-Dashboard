@@ -60,8 +60,8 @@ Efficient system monitoring is essential for maintaining peak operational perfor
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/Real-time-Computer-Performance-Dashboard.git
-   cd Real-time-Computer-Performance-Dashboard/Main
+   git clone https://github.com/semes23/System-Performance-Analytics-Dashboard.git
+   cd System-Performance-Analytics-Dashboard/Main
    ```
 
 2. **Install Python dependencies**:
