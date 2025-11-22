@@ -1,114 +1,203 @@
-# Performance Monitoring and Data Visualization Project
+# Real-Time Computer Performance Dashboard
 
-Welcome to the Performance Monitoring and Data Visualization project! This project aims to capture, store, and visualize real-time system performance metrics through an end-to-end data pipeline. By leveraging Python, MySQL, SQL Server, and Power BI, we've created a comprehensive solution to enhance decision-making.
+A comprehensive system performance monitoring solution that captures, stores, and visualizes real-time metrics through an integrated data pipeline. This project demonstrates end-to-end data engineering using Python, MySQL, SQL Server, and Power BI.
 
-----
+---
+
 ## Table of Contents
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
-- [Data Flow](#data-flow)
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Technology Stack](#technology-stack)
+- [Getting Started](#getting-started)
+- [Configuration](#configuration)
+- [Running the Project](#running-the-project)
+- [Architecture](#architecture)
 - [Dashboard Preview](#dashboard-preview)
-- [Acknowledgments](#acknowledgments)
-- [Contact](#contact)
-
-----
-## Introduction
-
-System performance monitoring is crucial for maintaining operational efficiency and preemptively identifying potential issues. This project takes a data-driven approach to capture, store, and visualize performance metrics in real-time, providing insights for informed decision-making.
+- [Credits](#credits)
+- [Support](#support)
 
 ---
-## Features
 
-- Fetches real-time Performance Monitoring Data using Python scripts(using psutil library).
-- Stores captured data securely in a MySQL database (using mysql-connector-python API).
-- Establishes a data pipeline to transfer data from MySQL to SQL Server database(using pyodbc API).
-- Connects SQL Server to Power BI for creating dynamic visualizations.
-- Constructs an interactive real-time dashboard for monitoring system performance.
+## Overview
+
+Efficient system monitoring is essential for maintaining peak operational performance and identifying potential issues before they impact productivity. This project implements a data-driven approach to collect, process, and visualize real-time system performance metrics, enabling informed decision-making and proactive infrastructure management.
 
 ---
-## Technologies Used
 
-- Python
-- MySQL
-- SQL Server
-- Power BI
+## Key Features
 
----
-## Setup Instructions
-
-1. Clone the repository
-2. Install required dependencies by following the instructions in the `requirements.txt` file after navigating to the project folder:
-`pip install -r requirements.txt`
-3. Set up the MySQL and SQL Server databases according to the provided schema.(Execute the `database_installation.sql` script on both the MySQL and SQL Server databases.)
-4. Configure the Python scripts with the necessary connection details.
-
-    **For MySQL:**
-
-    *host* = 'localhost'
-
-    *database* = 'system_Performance'
-
-    *user* = your username (root by default)
-
-    *password* = your password
-
-    *table_name* = 'performance'
-
-    **For SQL Server:**
-
-    *Driver*={SQL Server};
-
-    *Server*=your server name;
-
-    *Database*=System_Performance;
-
-    *Trusted_Connection*=yes;
-
-
-5. Install Power BI and connect to the SQL Server database(Or you can just open the system_performance.pbix file with powerBI software).
+- **Real-Time Data Collection**: Captures live system performance metrics using Python's psutil library
+- **Secure Data Storage**: Stores data reliably in MySQL database with automated backups
+- **Data Pipeline**: Seamlessly transfers data from MySQL to SQL Server for enhanced processing
+- **Interactive Dashboard**: Power BI integration provides dynamic visualizations and insights
+- **Performance Tracking**: Monitors CPU usage, memory consumption, disk activity, and network traffic
+- **Historical Analysis**: Maintains complete data history for trend analysis and performance comparison
 
 ---
-## Usage
 
-1. Run the Python script to fetch Performance Monitoring Data.(main.py script)
-2. Data is automatically stored in the MySQL database.
-3. The data pipeline transfers data from MySQL to SQL Server.
-4. Open the Power BI file to access the real-time dashboard.
+## Technology Stack
 
-
-
----
-## Data Flow
-
-1. Python script fetches data →
-2. Data stored in MySQL database →
-3. Data transferred to SQL Server via pipeline →
-4. Power BI accesses SQL Server and creates visualizations.
-
-![Screenshot of the Real-time Dashboard](/images/workFlow.png)
+- **Backend**: Python 3.x
+- **Data Storage**: MySQL, SQL Server 2025 Express
+- **Visualization**: Power BI Desktop
+- **Libraries**: psutil, mysql-connector-python, pyodbc
+- **Architecture**: ETL (Extract, Transform, Load) pipeline
 
 ---
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.7 or higher
+- MySQL Server 9.5+
+- SQL Server 2025 Express
+- Power BI Desktop
+- Git
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/Real-time-Computer-Performance-Dashboard.git
+   cd Real-time-Computer-Performance-Dashboard/Main
+   ```
+
+2. **Install Python dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set up databases**:
+   - Execute `database_Installation.sql` on your MySQL server
+   - Execute `database_Installation.sql` on your SQL Server instance
+
+---
+
+## Configuration
+
+### MySQL Configuration
+
+Update your MySQL connection details in `main.py`:
+
+```python
+MYSQL_CONFIG = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'your_password',
+    'database': 'system_Performance',
+    'table_name': 'performance'
+}
+```
+
+### SQL Server Configuration
+
+Update your SQL Server connection details in `main.py`:
+
+```python
+SQL_SERVER_CONFIG = {
+    'driver': '{SQL Server}',
+    'server': 'localhost\\SQLEXPRESS',
+    'database': 'System_Performance',
+    'trusted_connection': 'yes'
+}
+```
+
+### Power BI Setup
+
+1. Open Power BI Desktop
+2. Open the `system_performance.pbix` file
+3. Update the data source connection to your SQL Server instance
+4. Refresh the dashboard to load live data
+
+---
+
+## Running the Project
+
+1. **Start the monitoring service**:
+   ```bash
+   python main.py
+   ```
+
+2. **View real-time data in MySQL**:
+   ```sql
+   SELECT * FROM system_Performance.performance ORDER BY time DESC LIMIT 10;
+   ```
+
+3. **Open Power BI dashboard**:
+   - Launch Power BI Desktop
+   - Open `system_performance.pbix`
+   - The dashboard will automatically refresh with new data
+
+The Python script runs continuously, collecting metrics every few seconds and pushing data through the pipeline.
+
+---
+
+## Architecture
+
+The project follows a standard ETL pipeline:
+
+```
+System Metrics (CPU, Memory, Disk)
+         ↓
+    Python Script (Collection)
+         ↓
+    MySQL Database (Initial Storage)
+         ↓
+    Data Pipeline (ETL Process)
+         ↓
+    SQL Server Database (Processing)
+         ↓
+    Power BI Dashboard (Visualization)
+```
+
+---
+
 ## Dashboard Preview
 
-The final result of the project is a `real time dashboard`
+The interactive Power BI dashboard displays:
 
-![Screenshot of the Real-time Dashboard](/images/system_performance.png)
+- **CPU Usage**: Real-time processor utilization
+- **Memory Metrics**: RAM consumption and availability
+- **Disk Activity**: Storage usage and I/O performance
+- **Network Metrics**: Data transmission rates
+- **Historical Trends**: Performance patterns over time
+- **System Interrupts**: CPU interrupt frequencies
 
----
-## Acknowledgments
--We would like to express our gratitude to the following resources for their valuable contributions to this project:
+![Real-time Performance Dashboard](/images/system_performance.png)
 
-The official documentation of `Python` language.
-
-The documentation provided by `MySQL` and `SQL Server` for configuring and working with the database.
-
-The `Power BI` documentation, which aided in creating the dashboard.
-
-
-Feel free to customize the content and functionality of this Project according to your specific requirements.
+![Data Flow Architecture](/images/workFlow.png)
 
 ---
+
+## Credits
+
+This project leverages excellent open-source documentation and tools:
+
+- **Python**: Official Python documentation and psutil library
+- **MySQL**: Comprehensive MySQL documentation and best practices
+- **SQL Server**: Microsoft SQL Server documentation and tutorials
+- **Power BI**: Microsoft Power BI guides and visualization capabilities
+
+---
+
+## Support
+
+For issues, questions, or suggestions:
+
+1. Check the existing documentation in this repository
+2. Review the setup instructions carefully
+3. Ensure all prerequisites are installed correctly
+4. Verify database connections are properly configured
+
+---
+
+## License
+
+This project is open source and available for educational and professional use.
+
+---
+
+**Last Updated**: November 2025
+**Version**: 1.0
